@@ -91,7 +91,7 @@ router.post("/login", (req, res) => {
           payload,
           keys.secretKey,
           {
-            expiresIn: 3600
+            expiresIn: 86400
           },
           (err, token) => {
             res.json({
@@ -119,7 +119,7 @@ router.get(
     res.json({
       id: req.user.id,
       name: req.user.name,
-      email: req.user.emailemail
+      email: req.user.email
     });
   }
 );

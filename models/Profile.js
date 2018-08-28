@@ -20,8 +20,8 @@ const ProfileSchema = new Schema({
     type: String
   },
   location: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   status: {
     type: String,
