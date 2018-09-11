@@ -15,16 +15,15 @@ module.exports = function validateProfileInput(data) {
     errors.handle = "Profile handle is required";
   }
   if (Validator.isEmpty(data.status)) {
-    errors.status = "Statuts field is required";
+    errors.status = "Status field is required";
   }
   if (Validator.isEmpty(data.skills)) {
     errors.skills = "Skills is required";
   }
-  if (!isEmpty(data.website)) {
-    if (!Validator.isURL(data.website)) {
-      errors.website = "Not a valid URL";
-    }
-  }
+  // if (!Validator.isURL(data.website)) {
+  //   errors.website = "Not a valid URL";
+  // }
+
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
       errors.youtube = "Not a valid URL";

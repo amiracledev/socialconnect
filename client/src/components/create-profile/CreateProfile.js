@@ -49,9 +49,10 @@ class CreateProfile extends Component {
       bio: this.state.bio,
       twitter: this.state.twitter,
       facebook: this.state.facebook,
-      tiwtch: this.state.twitch,
+      twitch: this.state.twitch,
       youtube: this.state.youtube,
-      instagram: this.state.instagram
+      instagram: this.state.instagram,
+      steam: this.state.steam
     };
 
     this.props.createProfile(profileData, this.props.history);
@@ -106,7 +107,15 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
-            placeholder="Instagram Page URL"
+            placeholder="SteamPage URL"
+            name="instagram"
+            icon="fab fa-steam"
+            value={this.state.steam}
+            onChange={this.onChange}
+            error={errors.steam}
+          />
+          <InputGroup
+            placeholder="Instagram URL"
             name="instagram"
             icon="fab fa-instagram"
             value={this.state.instagram}
@@ -117,16 +126,16 @@ class CreateProfile extends Component {
       );
     }
 
-    // Select options for status
     const options = [
       { label: "* Select GamedIN Status", value: 0 },
       { label: "Noob", value: "Noob" },
-      { label: "Junior Developer", value: "Junior Developer" },
-      { label: "Senior Developer", value: "Senior Developer" },
-      { label: "Manager", value: "Manager" },
-      { label: "Student or Learning", value: "Student or Learning" },
-      { label: "Instructor or Teacher", value: "Instructor or Teacher" },
-      { label: "Intern", value: "Intern" },
+      { label: "Player", value: "Player" },
+      { label: "Recruit", value: "Recruit" },
+      { label: "Pro League Player", value: "Pro League Player" },
+      { label: "Co-Captain", value: "Co-Captain" },
+      { label: "Team Captain", value: "Team Captain" },
+      { label: "League Moderator", value: "League Moderator" },
+      { label: "Sponsor", value: "Sponsor" },
       { label: "Other", value: "Other" }
     ];
 
@@ -156,15 +165,15 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   options={options}
                   error={errors.status}
-                  info="Give us an idea of where you are at in your career"
+                  info="Give us an idea of where you are at in your gaming career"
                 />
                 <TextFieldGroup
                   placeholder="Team"
-                  name="company"
+                  name="team"
                   value={this.state.team}
                   onChange={this.onChange}
                   error={errors.team}
-                  info="Could be your current team"
+                  info="Your current team."
                 />
                 <TextFieldGroup
                   placeholder="Website"
@@ -172,7 +181,7 @@ class CreateProfile extends Component {
                   value={this.state.website}
                   onChange={this.onChange}
                   error={errors.website}
-                  info="Could be your own website or a company one"
+                  info="Personal, Team, or if you are a Sponsor then your company's website"
                 />
                 <TextFieldGroup
                   placeholder="Location"
@@ -180,7 +189,7 @@ class CreateProfile extends Component {
                   value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
-                  info="City or city & state or Country"
+                  info="city & state or Country with time zone"
                 />
                 <TextFieldGroup
                   placeholder="* Skills"
@@ -189,7 +198,7 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   error={errors.skills}
                   info="Please use comma separated values (eg.
-                    HTML,CSS,JavaScript,PHP"
+                    Sniper, Machine gunner, Strongest maps?, and any extra skills you bring to a team)"
                 />
 
                 <TextAreaFieldGroup
@@ -198,7 +207,7 @@ class CreateProfile extends Component {
                   value={this.state.bio}
                   onChange={this.onChange}
                   error={errors.bio}
-                  info="Tell us a little about yourself"
+                  info="Tell us a little about yourself....your gaming experience...times and days available ...and anything you'd like to share"
                 />
 
                 <div className="mb-3">
@@ -213,7 +222,7 @@ class CreateProfile extends Component {
                   >
                     Add Social Network Links
                   </button>
-                  <span className="text-muted">Optional</span>
+                  <span className="text-muted"> Optional</span>
                 </div>
                 {socialInputs}
                 <input
