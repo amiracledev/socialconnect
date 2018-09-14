@@ -44,7 +44,7 @@ class CreateProfile extends Component {
       const profile = nextProps.profile.profile;
 
       const skillsCSV = profile.skills.join(",");
-
+      //if profil doesnt exist
       profile.team = !isEmpty(profile.company) ? profile.team : "";
       profile.website = !isEmpty(profile.website) ? profile.website : "";
       profile.location = !isEmpty(profile.location) ? profile.location : "";
@@ -78,7 +78,6 @@ class CreateProfile extends Component {
         location: profile.location,
         status: profile.status,
         skills: skillsCSV,
-
         bio: profile.bio,
         twitter: profile.twitter,
         facebook: profile.facebook,
@@ -184,6 +183,7 @@ class CreateProfile extends Component {
       { label: "Noob", value: "Noob" },
       { label: "Player", value: "Player" },
       { label: "Recruit", value: "Recruit" },
+      { label: "Reservist", value: "Reservist" },
       { label: "Pro League Player", value: "Pro League Player" },
       { label: "Co-Captain", value: "Co-Captain" },
       { label: "Team Captain", value: "Team Captain" },
