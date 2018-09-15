@@ -25,22 +25,23 @@ import NotFound from "./components/not-found/NotFound";
 
 import "./App.css";
 
-//check for Token
+// Check for token
 if (localStorage.jwtToken) {
-  //set authtoken header
+  // Set auth token header auth
   setAuthToken(localStorage.jwtToken);
-  //decode token and get user info
+  // Decode token and get user info and exp
   const decoded = jwt_decode(localStorage.jwtToken);
-  //set user and isAuthenticated
+  // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-  //check for the expired token
+
+  // Check for expired token
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
-    //logout
+    // Logout user
     store.dispatch(logoutUser());
-    //clear current profile
+    // Clear current Profile
     store.dispatch(clearCurrentProfile());
-    //redirect
+    // Redirect to login
     window.location.href = "/login";
   }
 }
