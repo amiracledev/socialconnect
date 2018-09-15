@@ -40,7 +40,7 @@ app.use("/api/posts", posts);
 //Server stativ assets if in prod
 
 if (process.env.NODE_ENV === "production") {
-  //set static folder
+  // Set static folder
   app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {
