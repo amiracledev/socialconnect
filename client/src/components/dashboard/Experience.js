@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux"
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom"
-import Moment from 'react-moment';
-import { deleteExperience } from '../../actions/profileActions';
-
+import { withRouter } from "react-router-dom";
+import Moment from "react-moment";
+import { deleteExperience } from "../../actions/profileActions";
 
 class Experience extends Component {
-  onDeleteClick(id) {
-     this.props.deleteExperience(id);
-   }
+  // onDeleteClick(id) {
+  //    this.props.deleteExperience(id);
+  //  }
   render() {
     const experience = this.props.experience.map(exp => (
-          <tr key={exp._id}>
-            <td>{exp.team}</td>
-            <td>{exp.title}</td>
-            <td>
-              <Moment format="MM/DD/YYYY">{exp.from}</Moment> -
-              {exp.to === null ? (
-                ' Present'
-              ) : (
-                <Moment format="MM/DD/YYYY">{exp.to}</Moment>
-              )}
-            </td>
-            {/* <td>
+      <tr key={exp._id}>
+        <td>{exp.team}</td>
+        <td>{exp.title}</td>
+        <td>
+          <Moment format="MM/DD/YYYY">{exp.from}</Moment> -
+          {exp.to === null ? (
+            " Present"
+          ) : (
+            <Moment format="MM/DD/YYYY">{exp.to}</Moment>
+          )}
+        </td>
+        {/* <td>
               <button
                 onClick={this.onDeleteClick.bind(this, exp._id)}
                 className="btn btn-danger"
@@ -31,29 +30,28 @@ class Experience extends Component {
                 Delete (I might not let them delete..What do you think?)
               </button>
             </td> */}
-          </tr>
-        ));
+      </tr>
+    ));
 
-        return (
-         <div>
-           <h4 className="mb-4">Experience Credentials</h4>
-           <table className="table">
-             <thead>
-               <tr>
-                 <th>Team</th>
-                 <th>Title</th>
-                 <th>Duration</th>
-                 <th />
-               </tr>
-               {experience}
-             </thead>
-           </table>
-         </div>
-       );
+    return (
+      <div>
+        <table className="table">
+          <h4 className="mb-4">Experience Credentials</h4>
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Title</th>
+              <th>Duration</th>
+              <th />
+            </tr>
+            {experience}
+          </thead>
+        </table>
+      </div>
+    );
   }
-
 }
-Experience.propTypes = {
-  deleteExperience: PropTypes.func.isRequired
-};
+// Experience.propTypes = {
+//   deleteExperience: PropTypes.func.isRequired
+// };
 export default connect(null)(withRouter(Experience));

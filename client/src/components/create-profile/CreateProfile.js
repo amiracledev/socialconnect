@@ -125,7 +125,14 @@ class CreateProfile extends Component {
         </div>
       );
     }
-
+    const region = [
+      { label: "* Select your Region", value: 0 },
+      { label: "America East", value: "America East" },
+      { label: "America West", value: "America West" },
+      { label: "Europe", value: "Europe" },
+      { label: "Asia & Australia", value: "Asia & Australia" },
+      { label: "Other", value: "Other" }
+    ];
     const options = [
       { label: "* Select GamedIN Status", value: 0 },
       { label: "Noob", value: "Noob" },
@@ -136,6 +143,58 @@ class CreateProfile extends Component {
       { label: "Team Captain", value: "Team Captain" },
       { label: "League Moderator", value: "League Moderator" },
       { label: "Sponsor", value: "Sponsor" },
+      { label: "Other", value: "Other" }
+    ];
+
+    const teamOptions = [
+      { label: "* Select your team", value: 0 },
+      { label: "Actively Looking", value: "Actively Looking" },
+      { label: "Reservist", value: "Reservist" },
+      { label: "Animal House", value: "Animal House" },
+      { label: "Arctic", value: "Arctic" },
+      { label: "Beginners", value: "Beginners" },
+      { label: "Big Red One", value: "Big Red One" },
+      { label: "Blaze", value: "Blaze" },
+      { label: "BossFight", value: "BossFight" },
+      { label: "Burning Chrome", value: "Burning Chrome" },
+      { label: "Cannon Fodder", value: "Cannon Fodder" },
+      { label: "Danglers", value: "Danglers" },
+      { label: "Ember", value: "Ember" },
+      {
+        label: "Equipe Virtuelle Francophone",
+        value: "Equipe Virtuelle Francophone"
+      },
+      { label: "Family Frag", value: "Family Frag" },
+      { label: "Fierce", value: "Fierce" },
+      { label: "French Onward Union", value: "French Onward Union" },
+      { label: "French Power", value: "French Power" },
+      { label: "Fury", value: "Fury" },
+      { label: "G-Men", value: "G-Men" },
+      { label: "Gladiators", value: "Gladiators" },
+      { label: "Globochem", value: "Globochem" },
+      { label: "G.O.E", value: "G.O.E" },
+      { label: "Gravity", value: "Gravity" },
+      { label: "Legionnaires", value: "Legionnaires" },
+      { label: "Lemon Squad", value: "Lemon Squad" },
+      { label: "Magnificent Bastards", value: "Magnificent Bastards" },
+      { label: "Mob Squad", value: "Mob Squad" },
+      { label: "Phoenix", value: "Phoenix" },
+      { label: "Ragnarök", value: "Ragnarök" },
+      { label: "Rome", value: "Rome" },
+      { label: "Ronin", value: "Ronin" },
+      { label: "Silent Purge", value: "Silent Purge" },
+      { label: "Sinister Pride", value: "Sinister Pride" },
+      { label: "SMC Tactical", value: "SMC Tactical" },
+      { label: "Spanish Bull Union", value: "Spanish Bull Union" },
+      { label: "Sponsor", value: "Sponsor" },
+      { label: "Stone Cold Killers", value: "Stone Cold Killers" },
+      { label: "The Great Apes", value: "The Great Apes" },
+      { label: "The Hand of Death", value: "The Hand of Death" },
+      { label: "The Lords of War", value: "The Lords of War" },
+      { label: "The Tactical Illuminati", value: "The Tactical Illuminati" },
+      { label: "The Unit", value: "The Unit" },
+      { label: "Vikings", value: "Vikings" },
+      { label: "VRATH", value: "VRATH" },
       { label: "Other", value: "Other" }
     ];
 
@@ -156,7 +215,7 @@ class CreateProfile extends Component {
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="A unique handle for your profile URL. Your gamer name preferably"
+                  info="A unique handle for your profile URL. Your gamer name."
                 />
                 <SelectListGroup
                   placeholder="Status"
@@ -167,14 +226,24 @@ class CreateProfile extends Component {
                   error={errors.status}
                   info="Give us an idea of where you are at in your gaming career"
                 />
-                <TextFieldGroup
+                <SelectListGroup
+                  placeholder="Team"
+                  name="team"
+                  value={this.state.team}
+                  onChange={this.onChange}
+                  options={teamOptions}
+                  error={errors.team}
+                  info="Your current team."
+                />
+
+                {/* <TextFieldGroup
                   placeholder="Team"
                   name="team"
                   value={this.state.team}
                   onChange={this.onChange}
                   error={errors.team}
                   info="Your current team."
-                />
+                /> */}
                 <TextFieldGroup
                   placeholder="Website"
                   name="website"
@@ -183,14 +252,23 @@ class CreateProfile extends Component {
                   error={errors.website}
                   info="Personal, Team, or if you are a Sponsor then your company's website"
                 />
-                <TextFieldGroup
+                <SelectListGroup
+                  placeholder="Location"
+                  name="location"
+                  value={this.state.location}
+                  onChange={this.onChange}
+                  options={region}
+                  error={errors.location}
+                  info="Your location"
+                />
+                {/* <TextFieldGroup
                   placeholder="Location"
                   name="location"
                   value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
                   info="city & state or Country with time zone"
-                />
+                /> */}
                 <TextFieldGroup
                   placeholder="* Skills"
                   name="skills"
@@ -207,7 +285,7 @@ class CreateProfile extends Component {
                   value={this.state.bio}
                   onChange={this.onChange}
                   error={errors.bio}
-                  info="Tell us a little about yourself....your gaming experience...times and days available ...and anything you'd like to share"
+                  info="Tell us a little about yourself...your team...your company....your gaming experience...times & days available ...and anything you'd like to share"
                 />
 
                 <div className="mb-3">
