@@ -13,7 +13,8 @@ class ProfileItem extends Component {
           <div className="col-2">
             {/* <img src={profile.user.avatar} alt="" className="rounded-circle" /> */}
             <img
-              src="http://www.3a16.com/images/VSDSD73001_05.jpg"
+              // src="http://www.3a16.com/images/VSDSD73001_05.jpg"
+              src={profile.user.avatar}
               alt=""
               className="rounded"
             />

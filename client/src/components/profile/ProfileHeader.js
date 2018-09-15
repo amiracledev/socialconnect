@@ -13,8 +13,8 @@ class ProfileHeader extends Component {
               <div className="col-4 col-md-3 m-auto">
                 <img
                   className="rounded"
-                  src="http://www.3a16.com/images/VSDSD73001_05.jpg"
-                  // src={profile.user.avatar}
+                  // src="http://www.3a16.com/images/VSDSD73001_05.jpg"
+                  src={profile.user.avatar}
                   alt=""
                 />
               </div>
