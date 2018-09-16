@@ -43,7 +43,6 @@ class teamStats extends Component {
 	}
 
 	refreshChart() {
-		console.log('refreshChart')
 		let data = {
 			teamA: this.state.teamA,
 			teamB: this.state.teamB,
@@ -51,7 +50,6 @@ class teamStats extends Component {
 		}
 		axios.post('/api/charts/winloss', data)
 			.then(response => {
-				console.log('api request done?')
 				this.setState({ chartData: { datasets: response['data'] } });
 			});
 	}
@@ -134,52 +132,52 @@ class teamStats extends Component {
 			statContent = <Spinner />;
 		} else {
 			statContent = (
-				<div className="col-md-12">
-				<h1 className="display-4">Match Stats</h1>
-				<div className="col-md-12">
-					<div className="col-md-4" style={{ display: 'inline-block' }}>
-						<SelectListGroup
-							placeholder="Team"
-							name="team"
-							className="input-sm"
-							value={this.state.teamA}
-							onChange={(e) => this.onChange(e, 0)}
-							options={teamOptions}
-						/>
-					</div>
-					<div className="col-md-4" style={{ display: 'inline-block' }}>
-						<SelectListGroup
-							placeholder="Team"
-							name="team"
-							className="input-sm"
-							value={this.state.teamB}
-							onChange={(e) => this.onChange(e, 1)}
-							options={teamOptions}
-						/>
-					</div>
-					<div className="col-md-4" style={{ display: 'inline-block' }}>
-						<SelectListGroup
-							placeholder="Team"
-							name="team"
-							className="input-sm"
-							value={this.state.teamB}
-							onChange={(e) => this.onChange(e, 2)}
-							options={chartOptions}
-						/>
-					</div>
+				<div>
+					<h1 className="display-4">Match Stats</h1>
 					<div className="col-md-12">
-						<button className="btn" onClick={this.refreshChart}>Refresh Chart</button>
+						<div className="col-md-4" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="Team"
+								name="team"
+								className="input-sm"
+								value={this.state.teamA}
+								onChange={(e) => this.onChange(e, 0)}
+								options={teamOptions}
+							/>
+						</div>
+						<div className="col-md-4" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="Team"
+								name="team"
+								className="input-sm"
+								value={this.state.teamB}
+								onChange={(e) => this.onChange(e, 1)}
+								options={teamOptions}
+							/>
+						</div>
+						<div className="col-md-4" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="Team"
+								name="team"
+								className="input-sm"
+								value={this.state.teamB}
+								onChange={(e) => this.onChange(e, 2)}
+								options={chartOptions}
+							/>
+						</div>
+						<div className="col-md-12">
+							<button className="btn" onClick={this.refreshChart}>Refresh Chart</button>
+						</div>
 					</div>
-				</div>
-				<Bar
-					data={this.state.chartData}
-					height={100}
-					width={400}
-					options={{
-						maintainAspectRatio: true,
-						legend: false
-					}}
-				/>
+					<Bar
+						data={this.state.chartData}
+						height={100}
+						width={400}
+						options={{
+							maintainAspectRatio: true,
+							legend: false
+						}}
+					/>
 				</div>
 			);
 		}
@@ -188,7 +186,9 @@ class teamStats extends Component {
 			<div className="teamStats">
 				<div className="container">
 					<div className="row">
+						<div className="col-md-12">
 							{statContent}
+						</div>
 					</div>
 				</div>
 			</div>
