@@ -23,7 +23,7 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/teamStats">
+          <Link className="nav-link" to="/stats">
             Team Stats
           </Link>
         </li>
