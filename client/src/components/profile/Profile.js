@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ProfileHeader from "./ProfileHeader";
 import ProfileAbout from "./ProfileAbout";
 import ProfileCreds from "./ProfileCreds";
+import ProfileSkills from "./ProfileSkills";
 import Spinner from "../common/Spinner";
 import { getProfileByHandle } from "../../actions/profileActions";
 
@@ -40,6 +41,7 @@ class Profile extends Component {
           </div>
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
+          <ProfileSkills profile={profile} />
           <ProfileCreds experience={profile.experience} />
         </div>
       );

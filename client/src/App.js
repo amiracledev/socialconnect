@@ -16,6 +16,7 @@ import Landing from "./components/layout/Landing";
 import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
+import teamStats from "./components/teamStats/teamStats";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import AddExperience from "./components/add-credentials/AddExperience";
@@ -61,6 +62,9 @@ class App extends Component {
               <Route exact path="/profile/:handle" component={Profile} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/stats" component={teamStats} />
               </Switch>
               <Switch>
                 <PrivateRoute
