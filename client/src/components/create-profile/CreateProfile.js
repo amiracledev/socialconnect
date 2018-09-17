@@ -71,7 +71,7 @@ class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
-            placeholder="Twitter Profile URL"
+            placeholder="Twitter Profile URL (Make sure to add https://)"
             name="twitter"
             icon="fab fa-twitter"
             value={this.state.twitter}
@@ -80,7 +80,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
-            placeholder="Facebook Page URL"
+            placeholder="Facebook Page URL (Make sure to add https://)"
             name="facebook"
             icon="fab fa-facebook"
             value={this.state.facebook}
@@ -89,7 +89,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
-            placeholder="Twitch Profile URL"
+            placeholder="Twitch Profile URL (Make sure to add https://)"
             name="linkedin"
             icon="fab fa-twitch"
             value={this.state.twitch}
@@ -98,7 +98,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
-            placeholder="YouTube Channel URL"
+            placeholder="YouTube Channel URL (Make sure to add https://)"
             name="youtube"
             icon="fab fa-youtube"
             value={this.state.youtube}
@@ -107,7 +107,7 @@ class CreateProfile extends Component {
           />
 
           <InputGroup
-            placeholder="SteamPage URL"
+            placeholder="SteamPage URL (Make sure to add https://)"
             name="instagram"
             icon="fab fa-steam"
             value={this.state.steam}
@@ -115,7 +115,7 @@ class CreateProfile extends Component {
             error={errors.steam}
           />
           <InputGroup
-            placeholder="Instagram URL"
+            placeholder="Instagram URL (Make sure to add https://)"
             name="instagram"
             icon="fab fa-instagram"
             value={this.state.instagram}

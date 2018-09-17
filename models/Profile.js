@@ -76,9 +76,9 @@ const ProfileSchema = new Schema({
     facebook: {
       type: String
     },
-    discord: {
-      type: String
-    },
+    // discord: {
+    //   type: String
+    // },
     instagram: {
       type: String
     },
