@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const MatchSchema = new Schema({
     date: {
-        type: String,
+        type: Date,
     },
     homeTeam:{
         type: String,
