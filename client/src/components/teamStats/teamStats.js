@@ -19,7 +19,7 @@ class teamStats extends Component {
 			},
 			teamA: '',
 			teamB: '',
-			chart: 'round'
+			roundsMaps: 'rounds'
 		}
 		this.refreshChart = this.refreshChart.bind(this)
 		this.onChange = this.onChange.bind(this);
@@ -44,9 +44,8 @@ class teamStats extends Component {
 
 	refreshChart() {
 		let data = {
-			teamA: this.state.teamA,
-			teamB: this.state.teamB,
-			chart: this.state.chart
+			teamNames: [this.state.teamA, this.state.teamB],
+			roundsMaps: this.state.roundsMaps
 		}
 		axios.post('/api/charts/winloss', data)
 			.then(response => {
