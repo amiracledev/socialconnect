@@ -121,8 +121,8 @@ class teamStats extends Component {
 		];
 
 		const chartOptions = [
-			{ label: 'Map Wins', value: 'map' },
-			{ label: 'Round Wins', value: 'round' }
+			{ label: 'Map Wins', value: 'maps' },
+			{ label: 'Round Wins', value: 'rounds' }
 		]
 
 		let statContent;
