@@ -353,22 +353,45 @@ let datapoints = [{
 const passport = require("passport");
 const express = require("express");
 const router = express.Router();
+const WebFunctions = require("../shared/WebFunctions");
 
 //@routes   GET api/chart/winloss/
 //@desc     Get chart data for maps and rounds for given teams
 //@access   Private
 router.route("/")
-    .get(passport.authenticate("jwt", {session: false}),(req, res) => {
-            console.log('got get request');
+    .get(passport.authenticate("jwt", {
+        session: false
+    }), (req, res) => {
+        console.log('got get request');
+        res.json(datapoints);
+    })
+    .post(passport.authenticate("jwt", {
+        session: false
+    }), (req, res) => {
+        if ((req.body['teamA'] != '' || req.body['teamB'] != '')) {
+            res.json(datapoints.filter(x => (x.label == req.body['teamA'] + ' wins' || x.label == req.body['teamA'] + ' losses' || x.label == req.body['teamB'] + ' wins' || x.label == req.body['teamB'] + ' losses')));
+        } else {
             res.json(datapoints);
-        })
-    .post(passport.authenticate("jwt", {session: false}),(req, res) => {
-            if ((req.body['teamA'] != '' || req.body['teamB'] != '')) {
-                res.json(datapoints.filter(x => (x.label == req.body['teamA'] + ' wins' || x.label == req.body['teamA'] + ' losses' || x.label == req.body['teamB'] + ' wins' || x.label == req.body['teamB'] + ' losses')));
-            }else{
-                res.json(datapoints);
-            }
+        }
+    });
+
+//@routes   GET api/chart/winloss/
+//@desc     Get chart data for maps and rounds for given teams
+//@access   Private
+router.route("/test")
+    .get(passport.authenticate("jwt", {
+        session: false
+    }), (req, res) => {
+        WebFunctions.resetCallbackVariables(function () {
+            WebFunctions.getMatches(function () {
+                WebFunctions.getAllMatchInfo(function () {
+
+                });
+            });
         });
+    });
+
+
 
 
 module.exports = router;
