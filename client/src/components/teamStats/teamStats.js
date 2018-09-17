@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getProfileByHandle } from "../../actions/profileActions";
+import { getCurrentProfile } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import axios from 'axios';
 import SelectListGroup from "../common/SelectListGroup";
@@ -26,9 +26,7 @@ class teamStats extends Component {
 	}
 
 	componentDidMount() {
-		if (this.props.auth['user']['name']) {
-			this.props.getProfileByHandle(this.props.auth['user']['name']);
-		}
+		this.props.getCurrentProfile();
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -196,7 +194,7 @@ class teamStats extends Component {
 }
 
 teamStats.propTypes = {
-	getProfileByHandle: PropTypes.func.isRequired,
+	getCurrentProfile: PropTypes.func.isRequired,
 	profile: PropTypes.object.isRequired
 };
 
@@ -207,5 +205,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getProfileByHandle }
+	{ getCurrentProfile }
 )(teamStats);
