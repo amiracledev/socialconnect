@@ -4,38 +4,37 @@ let MatchFunctions = require('./MatchFunctions');
 let TeamFunctions = require('./TeamFunctions');
 let matches = new Array();
 
+let getmatchInfo = function (match) {
+	return new Promise((resolve, reject) => {
+		if (match['homeTeam'] == '' && match['awayTeam'] == '') resolve();
+		let options = {
+			uri: 'https://vrmasterleague.com/Services.asmx/GetMatchSets',
+			form: {
+				encrValue: match['matchSet']
+			}
+		}
+		request.post(options, function (err, res, body) {
+			match['date'] = new Date(match['date']);
+			let maps = JSON.parse(body.substring(body.indexOf('['), body.indexOf(']') + 1));
+			for (let map_index in maps) {
+				match['map' + (parseInt(map_index) + 1)] = {
+					mapName: maps[map_index]['Map'].toLowerCase().split(" ")[0],
+					scoreHome: maps[map_index]['ScoreHome'],
+					scoreAway: maps[map_index]['ScoreAway']
+				}
+				if (map_index == maps.length - 1) {
+					resolve();
+				}
+			}
+		});
+	});
+}
+
 module.exports = {
 	'getAllMatchInfo': () => {
 		return new Promise((resolve, reject) => {
-			let count = 0;
-			for (let match of matches) {
-				if (match['homeTeam'] == '' && match['awayTeam'] == '') continue;
-				let options = {
-					uri: 'https://vrmasterleague.com/Services.asmx/GetMatchSets',
-					form: {
-						encrValue: match['matchSet']
-					}
-				}
-				request.post(options, function (err, res, body) {
-					match['date'] = new Date(match['date']);
-					let maps = JSON.parse(body.substring(body.indexOf('['), body.indexOf(']') + 1));
-					for (let map_index in maps) {
-						match['map' + (parseInt(map_index) + 1)] = {
-							mapName: maps[map_index]['Map'].toLowerCase().split(" ")[0],
-							scoreHome: maps[map_index]['ScoreHome'],
-							scoreAway: maps[map_index]['ScoreAway']
-						}
-						if (map_index == maps.length - 1) {
-							count++;
-							console.log(count, matches.length);
-							if (count == matches.length - 1) {
-								console.log('finished getAllMatchInfo')
-								resolve(matches);
-							}
-						}
-					}
-				});
-			}
+			let results = Promise.all(matches.map(getmatchInfo))
+			results.then(() => resolve(matches));
 		});
 	},
 	'getMatches': () => {

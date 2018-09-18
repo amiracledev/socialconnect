@@ -53,13 +53,11 @@ class teamStats extends Component {
 		axios.post('/api/charts/winloss', data)
 			.then(response => {
 				this.setState({ chartData: { labels: ['Bazaar', 'Cargo', 'Downfall', 'Q1', 'Suburbia', 'Subway', 'Tanker'], datasets: response['data'] } }, function () {
-					console.log(this.state.chartData);
 				});
 			});
 	}
 
 	onChange(e) {
-		console.log(e.target.name, e.target.value);
 		this.setState({ [e.target.name]: e.target.value }, function () {
 			this.refreshChart();
 		});
@@ -117,8 +115,8 @@ class teamStats extends Component {
 		];
 
 		const chartOptions = [
-			{ label: 'Map Wins', value: 'maps' },
-			{ label: 'Round Wins', value: 'rounds' }
+			{ label: 'Maps', value: 'maps' },
+			{ label: 'Rounds', value: 'rounds' }
 		]
 
 		let statContent;
@@ -171,7 +169,6 @@ class teamStats extends Component {
 							width={400}
 							options={{
 								maintainAspectRatio: true,
-								legend: false,
 								legend: {
 									display: this.state.legend
 								}
