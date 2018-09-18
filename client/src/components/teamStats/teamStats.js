@@ -17,6 +17,7 @@ class teamStats extends Component {
 				labels: ['Bazaar', 'Cargo', 'Downfall', 'Q1', 'Suburbia', 'Subway', 'Tanker'],
 				datasets: []
 			},
+			legend: true,
 			teamA: '',
 			teamB: '',
 			roundsMaps: 'rounds'
@@ -41,30 +42,27 @@ class teamStats extends Component {
 	}
 
 	refreshChart() {
+		let teamNames = [];
+		if (this.state.teamA !== '') teamNames.push(this.state.teamA);
+		if (this.state.teamB !== '') teamNames.push(this.state.teamB);
+		if (teamNames.length === 0) { this.setState({ legend: false }) } else { this.setState({ legend: true }) };
 		let data = {
-			teamNames: [this.state.teamA, this.state.teamB],
+			teamNames: teamNames,
 			roundsMaps: this.state.roundsMaps
 		}
 		axios.post('/api/charts/winloss', data)
 			.then(response => {
-				this.setState({ chartData: { datasets: response['data'] } });
+				this.setState({ chartData: { labels: ['Bazaar', 'Cargo', 'Downfall', 'Q1', 'Suburbia', 'Subway', 'Tanker'], datasets: response['data'] } }, function () {
+					console.log(this.state.chartData);
+				});
 			});
 	}
 
-	onChange(e, index) {
-		if (index === 0) {
-			this.setState({ teamA: e.target.value }, function () {
-				this.refreshChart();
-			});
-		} else if (index === 1) {
-			this.setState({ teamB: e.target.value }, function () {
-				this.refreshChart();
-			});
-		} else {
-			this.setState({ chart: e.target.value }, function () {
-				this.refreshChart();
-			});
-		}
+	onChange(e) {
+		console.log(e.target.name, e.target.value);
+		this.setState({ [e.target.name]: e.target.value }, function () {
+			this.refreshChart();
+		});
 	}
 
 	render() {
@@ -135,30 +133,30 @@ class teamStats extends Component {
 						<div className="col-md-4" style={{ display: 'inline-block' }}>
 							<SelectListGroup
 								placeholder="Team"
-								name="team"
+								name="teamA"
 								className="input-sm"
 								value={this.state.teamA}
-								onChange={(e) => this.onChange(e, 0)}
+								onChange={this.onChange}
 								options={teamOptions}
 							/>
 						</div>
 						<div className="col-md-4" style={{ display: 'inline-block' }}>
 							<SelectListGroup
 								placeholder="Team"
-								name="team"
+								name="teamB"
 								className="input-sm"
 								value={this.state.teamB}
-								onChange={(e) => this.onChange(e, 1)}
+								onChange={this.onChange}
 								options={teamOptions}
 							/>
 						</div>
 						<div className="col-md-4" style={{ display: 'inline-block' }}>
 							<SelectListGroup
-								placeholder="Team"
-								name="team"
+								placeholder="roundsMaps"
+								name="roundsMaps"
 								className="input-sm"
-								value={this.state.teamB}
-								onChange={(e) => this.onChange(e, 2)}
+								value={this.state.roundsMaps}
+								onChange={this.onChange}
 								options={chartOptions}
 							/>
 						</div>
@@ -166,15 +164,23 @@ class teamStats extends Component {
 							<button className="btn" onClick={this.refreshChart}>Refresh Chart</button>
 						</div>
 					</div>
-					<Bar
-						data={this.state.chartData}
-						height={100}
-						width={400}
-						options={{
-							maintainAspectRatio: true,
-							legend: false
-						}}
-					/>
+					<div className="col-md-12">
+						<Bar
+							data={this.state.chartData}
+							height={100}
+							width={400}
+							options={{
+								maintainAspectRatio: true,
+								legend: false,
+								legend: {
+									display: this.state.legend
+								}
+							}}
+						/>
+						<div className="col-md-12">
+							<p>* Hover for more info.</p>
+						</div>
+					</div>
 				</div>
 			);
 		}
