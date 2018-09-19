@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const request = require('request');
-const cheerio = require('cheerio');
 
 const WebFunctions = require('./shared/WebFunctions');
 const MatchFunctions = require('./shared/MatchFunctions');
 const TeamFunctions = require('./shared/TeamFunctions');
+
+const Season = require('../../models/Seasons');
 
 const winLoss = require("./chartTypes/winLoss");
 
@@ -151,5 +151,29 @@ router.route('/teams').get((req, res) => {
 	}
 });
 
+router.route('/createseason').get((req,res) =>{
+	let season5_data = {
+		season: 'Season 5',
+		startDate: new Date(2018, 5, 25),
+		endDate: new Date(2018, 7, 31)
+	}
+	let season5 = new Season(season5_data);
+	season5.save(function(err, new_season5){
+		if(err){
+			console.error(err);
+		}
+		let season6_data ={
+			season: 'Season 5',
+			startDate: new Date(2018, 8, 1)
+		}
+		let season6 = new Season(season6_data);
+		season6.save(function(err, new_season6){
+			if(err){
+				console.error(err);
+			}
+			res.json({new_season5, new_season6});
+		});
+	});
+});
 
 module.exports = router;
