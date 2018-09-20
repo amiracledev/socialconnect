@@ -30,9 +30,9 @@ let MatchFunctions = {
 			});
 		});
 	},
-	'findAllMatches': () => {
+	'findAllMatches': (query) => {
 		return new Promise((resolve, reject) => {
-			Match.find({}, function (err, results) {
+			Match.find(query, function (err, results) {
 				if (err) {
 					console.error(err);
 					reject(err);

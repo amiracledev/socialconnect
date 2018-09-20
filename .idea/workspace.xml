@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be16ed7f-63b1-42ec-bc23-76bf5c8ecb43" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/models/Season.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/charts/shared/SeasonFunctions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/teamStats/teamStats.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/teamStats/teamStats.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Team.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Team.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/charts/chartTypes/winLoss.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/charts/chartTypes/winLoss.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/charts/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/charts/charts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/charts/shared/MatchFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/charts/shared/MatchFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/charts/shared/TeamFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/charts/shared/TeamFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/charts/shared/WebFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/charts/shared/WebFunctions.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,7 +26,7 @@
     <session id="-348755954">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.4" value="1" />
@@ -119,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/components/teamStats/teamStats.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1665">
-              <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
+            <state relative-caret-position="1635">
+              <caret line="116" column="4" selection-start-line="116" selection-start-column="4" selection-end-line="116" selection-end-column="4" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -252,18 +261,17 @@
       <workItem from="1537168392998" duration="1256000" />
       <workItem from="1537209495081" duration="415000" />
       <workItem from="1537220070577" duration="3185000" />
-      <workItem from="1537442942512" duration="1440000" />
+      <workItem from="1537442942512" duration="1813000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7347000" />
+    <option name="totallyTimeSpent" value="7720000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24383369" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24383369" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -277,7 +285,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.33493975" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.33493975" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -352,8 +360,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/teamStats/teamStats.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
+        <state relative-caret-position="1635">
+          <caret line="116" column="4" selection-start-line="116" selection-start-column="4" selection-end-line="116" selection-end-column="4" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

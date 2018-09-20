@@ -16,7 +16,7 @@ router.route("/")
 	}), (req, res) => {
 		let body = req.body;
 		if (body['teamNames'] && body['teamNames'].length == 1) {
-			TeamFunctions.findOneTeam(body['teamNames'][0]).then((team) => {
+			TeamFunctions.findOneTeam(body['teamNames'][0],body['season']).then((team) => {
 				let dataPoints = [];
 				dataPoints.push({
 					label: team['team'] + ' wins',
@@ -37,7 +37,7 @@ router.route("/")
 				res.json(dataPoints);
 			});
 		} else if (body['teamNames'] && body['teamNames'].length == 2) {
-			TeamFunctions.findTwoTeams(body['teamNames']).then((teams) => {
+			TeamFunctions.findTwoTeams(body['teamNames'],body['season']).then((teams) => {
 				let dataPoints = []
 				let count = 0;
 				for (let index in teams) {
@@ -75,7 +75,7 @@ router.route("/")
 				}
 			});
 		} else {
-			TeamFunctions.findAllTeams().then((teams) => {
+			TeamFunctions.findAllTeams(body['season']).then((teams) => {
 				let dataPoints = []
 				let count = 0;
 				for (let team of teams) {

@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 const TeamSchema = new Schema({
     team: {
         type: String,
-    },
+	},
+	season:{
+		type: String
+	},
     bazaar: {
         maps: {
             win: {

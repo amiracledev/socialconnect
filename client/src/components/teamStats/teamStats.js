@@ -17,8 +17,10 @@ class teamStats extends Component {
 				labels: ['Bazaar', 'Cargo', 'Downfall', 'Q1', 'Suburbia', 'Subway', 'Tanker'],
 				datasets: []
 			},
+			legend: true,
 			teamA: '',
 			teamB: '',
+			season: 'Season 5 2018',
 			roundsMaps: 'rounds'
 		}
 		this.refreshChart = this.refreshChart.bind(this)
@@ -42,30 +44,26 @@ class teamStats extends Component {
 
 
 	refreshChart() {
+		let teamNames = [];
+		if (this.state.teamA !== '') teamNames.push(this.state.teamA);
+		if (this.state.teamB !== '') teamNames.push(this.state.teamB);
+		if (teamNames.length === 0) { this.setState({ legend: false }) } else { this.setState({ legend: true }) };
 		let data = {
-			teamNames: [this.state.teamA, this.state.teamB],
-			roundsMaps: this.state.roundsMaps
+			teamNames: teamNames,
+			roundsMaps: this.state.roundsMaps,
+			season: this.state.season
 		}
 		axios.post('/api/charts/winloss', data)
 			.then(response => {
-				this.setState({ chartData: { datasets: response['data'] } });
+				this.setState({ chartData: { labels: ['Bazaar', 'Cargo', 'Downfall', 'Q1', 'Suburbia', 'Subway', 'Tanker'], datasets: response['data'] } }, function () {
+				});
 			});
 	}
 
-	onChange(e, index) {
-		if (index === 0) {
-			this.setState({ teamA: e.target.value }, function () {
-				this.refreshChart();
-			});
-		} else if (index === 1) {
-			this.setState({ teamB: e.target.value }, function () {
-				this.refreshChart();
-			});
-		} else {
-			this.setState({ chart: e.target.value }, function () {
-				this.refreshChart();
-			});
-		}
+	onChange(e) {
+		this.setState({ [e.target.name]: e.target.value }, function () {
+			this.refreshChart();
+		});
 	}
 
 	render() {
@@ -120,8 +118,13 @@ class teamStats extends Component {
 		];
 
 		const chartOptions = [
-			{ label: 'Map Wins', value: 'maps' },
-			{ label: 'Round Wins', value: 'rounds' }
+			{ label: 'Maps', value: 'maps' },
+			{ label: 'Rounds', value: 'rounds' }
+		]
+
+		const seasonOptions = [
+			{ label: 'Season 5 2018', value: 'Season 5 2018' },
+			{ label: 'Season 6 2018', value: 'Season 6 2018' }
 		]
 
 		let statContent;
@@ -133,49 +136,66 @@ class teamStats extends Component {
 				<div>
 					<h1 className="display-4">Match Stats</h1>
 					<div className="col-md-12">
-						<div className="col-md-4" style={{ display: 'inline-block' }}>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
 							<SelectListGroup
 								placeholder="Team"
-								name="team"
+								name="teamA"
 								className="input-sm"
 								value={this.state.teamA}
-								onChange={(e) => this.onChange(e, 0)}
+								onChange={this.onChange}
 								options={teamOptions}
 							/>
 						</div>
-						<div className="col-md-4" style={{ display: 'inline-block' }}>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
 							<SelectListGroup
 								placeholder="Team"
-								name="team"
+								name="teamB"
 								className="input-sm"
 								value={this.state.teamB}
-								onChange={(e) => this.onChange(e, 1)}
+								onChange={this.onChange}
 								options={teamOptions}
 							/>
 						</div>
-						<div className="col-md-4" style={{ display: 'inline-block' }}>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
 							<SelectListGroup
-								placeholder="Team"
-								name="team"
+								placeholder="roundsMaps"
+								name="roundsMaps"
 								className="input-sm"
-								value={this.state.teamB}
-								onChange={(e) => this.onChange(e, 2)}
+								value={this.state.roundsMaps}
+								onChange={this.onChange}
 								options={chartOptions}
+							/>
+						</div>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="Season"
+								name="season"
+								className="input-sm"
+								value={this.state.season}
+								onChange={this.onChange}
+								options={seasonOptions}
 							/>
 						</div>
 						<div className="col-md-12">
 							<button className="btn" onClick={this.refreshChart}>Refresh Chart</button>
 						</div>
 					</div>
-					<Bar
-						data={this.state.chartData}
-						height={100}
-						width={400}
-						options={{
-							maintainAspectRatio: true,
-							legend: false
-						}}
-					/>
+					<div className="col-md-12">
+						<Bar
+							data={this.state.chartData}
+							height={100}
+							width={400}
+							options={{
+								maintainAspectRatio: true,
+								legend: {
+									display: this.state.legend
+								}
+							}}
+						/>
+						<div className="col-md-12">
+							<p>* Hover for more info.</p>
+						</div>
+					</div>
 				</div>
 			);
 		}

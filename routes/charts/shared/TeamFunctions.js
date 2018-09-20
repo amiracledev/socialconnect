@@ -18,7 +18,7 @@ let TeamFunctions = {
 				});
 		});
 	},
-	'insertOneTeam': (teamName) => {
+	'insertOneTeam': (teamName, season) => {
 		return new Promise((resolve, reject) => {
 			let query = {
 				team: teamName
@@ -31,6 +31,8 @@ let TeamFunctions = {
 				if (results) {
 					let team = new Team();
 					team['team'] = teamName;
+					team['season'] = season;
+					console.log(teamName);
 					team.save(function (err, team) {
 						if (err) {
 							console.error(err);
@@ -44,9 +46,9 @@ let TeamFunctions = {
 			});
 		});
 	},
-	'findAllTeams': () => {
+	'findAllTeams': (season) => {
 		return new Promise((resolve, reject) => {
-			Team.find({}, '-__v -_id', function (err, results) {
+			Team.find({"season": season}, '-__v -_id', function (err, results) {
 				if (err) {
 					console.error(err);
 					reject(err);
@@ -55,11 +57,56 @@ let TeamFunctions = {
 			});
 		});
 	},
-	'findOneTeam': (teamName) => {
+	'resetTeamWinLoss': (season) => {
+		return new Promise((resolve, reject) => {
+			let update = {
+				$set: {
+					'bazaar.rounds.win': 0,
+					'bazaar.rounds.loss': 0,
+					'bazaar.maps.win': 0,
+					'bazaar.maps.loss': 0,
+					'cargo.rounds.win': 0,
+					'cargo.rounds.loss': 0,
+					'cargo.maps.win': 0,
+					'cargo.maps.loss': 0,
+					'downfall.rounds.win': 0,
+					'downfall.rounds.loss': 0,
+					'downfall.maps.win': 0,
+					'downfall.maps.loss': 0,
+					'quarantine.rounds.win': 0,
+					'quarantine.rounds.loss': 0,
+					'quarantine.maps.win': 0,
+					'quarantine.maps.loss': 0,
+					'suburbia.rounds.win': 0,
+					'suburbia.rounds.loss': 0,
+					'suburbia.maps.win': 0,
+					'suburbia.maps.loss': 0,
+					'subway.rounds.win': 0,
+					'subway.rounds.loss': 0,
+					'subway.maps.win': 0,
+					'subway.maps.loss': 0,
+					'tanker.rounds.win': 0,
+					'tanker.rounds.loss': 0,
+					'tanker.maps.win': 0,
+					'tanker.maps.loss': 0
+				}
+			}
+			Team.updateMany({season: season}, update, function(err){
+				if(err){
+					console.error(err);
+					reject(err);
+				}
+				resolve();
+			})
+		});
+	},
+	'findOneTeam': (teamName, season) => {
 		return new Promise((resolve, reject) => {
 			let query = {
-				"team": teamName
+				"team": teamName,
+				"season": season
 			}
+			console.log(query);
 			Team.findOne(query, '-__v -_id', function (err, result) {
 				if (err) {
 					console.error(err);
@@ -69,7 +116,7 @@ let TeamFunctions = {
 			});
 		});
 	},
-	'findTwoTeams': (teamNames) => {
+	'findTwoTeams': (teamNames, season) => {
 		return new Promise((resolve, reject) => {
 			let query = {
 				$or: [{
@@ -78,7 +125,8 @@ let TeamFunctions = {
 					{
 						'team': teamNames[1]
 					}
-				]
+				],
+				"season": season
 			}
 			Team.find(query, '-__v -_id', function (err, results) {
 				if (err) {
@@ -89,11 +137,12 @@ let TeamFunctions = {
 			});
 		});
 	},
-	'updateOneMap': (mapData) => {
+	'updateOneMap': (mapData, season) => {
 		return new Promise((resolve, reject) => {
 			if (mapData['map'] != 'other') {
 				let query = {
-					'team': mapData['teamName']
+					'team': mapData['teamName'],
+					'season': season
 				}
 				Team.findOne(query, function (err, team) {
 					if (err) {
@@ -101,8 +150,10 @@ let TeamFunctions = {
 						reject(err);
 					}
 					if (team == null) {
+						console.log("COULD NOT FIND TEAM" , query)
 						team = new Team();
 						team['team'] = mapData['teamName'];
+						team['season'] = season;
 						team.save(function (err, team) {
 							if (err) {
 								console.error(err);
