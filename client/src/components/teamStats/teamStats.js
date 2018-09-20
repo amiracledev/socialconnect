@@ -40,6 +40,7 @@ class teamStats extends Component {
 		}
 	}
 
+
 	refreshChart() {
 		let data = {
 			teamNames: [this.state.teamA, this.state.teamB],
