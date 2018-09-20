@@ -20,6 +20,7 @@ class teamStats extends Component {
 			legend: true,
 			teamA: '',
 			teamB: '',
+			season: 'Season 5 2018',
 			roundsMaps: 'rounds'
 		}
 		this.refreshChart = this.refreshChart.bind(this)
@@ -48,7 +49,8 @@ class teamStats extends Component {
 		if (teamNames.length === 0) { this.setState({ legend: false }) } else { this.setState({ legend: true }) };
 		let data = {
 			teamNames: teamNames,
-			roundsMaps: this.state.roundsMaps
+			roundsMaps: this.state.roundsMaps,
+			season: this.state.season
 		}
 		axios.post('/api/charts/winloss', data)
 			.then(response => {
@@ -119,6 +121,11 @@ class teamStats extends Component {
 			{ label: 'Rounds', value: 'rounds' }
 		]
 
+		const seasonOptions = [
+			{ label: 'Season 5 2018', value: 'Season 5 2018' },
+			{ label: 'Season 6 2018', value: 'Season 6 2018' }
+		]
+
 		let statContent;
 
 		if (profile === null || loading) {
@@ -128,7 +135,7 @@ class teamStats extends Component {
 				<div>
 					<h1 className="display-4">Match Stats</h1>
 					<div className="col-md-12">
-						<div className="col-md-4" style={{ display: 'inline-block' }}>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
 							<SelectListGroup
 								placeholder="Team"
 								name="teamA"
@@ -138,7 +145,7 @@ class teamStats extends Component {
 								options={teamOptions}
 							/>
 						</div>
-						<div className="col-md-4" style={{ display: 'inline-block' }}>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
 							<SelectListGroup
 								placeholder="Team"
 								name="teamB"
@@ -148,7 +155,7 @@ class teamStats extends Component {
 								options={teamOptions}
 							/>
 						</div>
-						<div className="col-md-4" style={{ display: 'inline-block' }}>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
 							<SelectListGroup
 								placeholder="roundsMaps"
 								name="roundsMaps"
@@ -156,6 +163,16 @@ class teamStats extends Component {
 								value={this.state.roundsMaps}
 								onChange={this.onChange}
 								options={chartOptions}
+							/>
+						</div>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="Season"
+								name="season"
+								className="input-sm"
+								value={this.state.season}
+								onChange={this.onChange}
+								options={seasonOptions}
 							/>
 						</div>
 						<div className="col-md-12">
