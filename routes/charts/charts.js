@@ -52,7 +52,7 @@ router.route('/').get((req, res) => {
 	});
 });
 
-router.route('/teams').get((req, res) => {
+/* router.route('/teams').get((req, res) => {
 	let teams = [];
 	MatchFunctions.findAllMatches().then(matches => {
 		for (let match of matches) {
@@ -64,13 +64,13 @@ router.route('/teams').get((req, res) => {
 		return;
 	}).then(() => {
 		for (let index in teams) {
-			TeamFunctions.insertOneTeam(teams[index], 'Season 5 2018').then(() => {
+			TeamFunctions.insertOneTeam(teams[index], 'Season 6 2018').then(() => {
 				if (index == teams.length - 1) res.send('done');
 			});
 		}
 	});
 
-});
+}); */
 
 router.route('/setwinloss').get((req, res) => {
 	let season = req.query.season.replace('"', '').replace('"', '')
@@ -121,13 +121,13 @@ router.route('/setwinloss').get((req, res) => {
 	});
 });
 
-router.route('/resetteam').get((req, res) => {
+/* router.route('/resetteam').get((req, res) => {
 	TeamFunctions.resetTeamWinLoss('Season 5 2018').then(() => {
 		res.send('done');
 	})
-})
+}) */
 
-router.route('/createseason').get((req, res) => {
+/* router.route('/createseason').get((req, res) => {
 	let season5_data = {
 		season: 'Season 5 2018',
 		startDate: new Date(2018, 5, 25).toISOString(),
@@ -136,6 +136,6 @@ router.route('/createseason').get((req, res) => {
 	SeasonFunctions.insertOneSeason(season5_data).then(result => {
 		res.send(result);
 	});
-});
+}); */
 
 module.exports = router;
