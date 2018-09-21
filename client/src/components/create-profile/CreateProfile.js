@@ -219,7 +219,8 @@ class CreateProfile extends Component {
                 />
                 <SelectListGroup
                   placeholder="Status"
-                  name="status"
+				  name="status"
+				  classes="form-control-lg"
                   value={this.state.status}
                   onChange={this.onChange}
                   options={options}
@@ -228,7 +229,7 @@ class CreateProfile extends Component {
                 />
                 <SelectListGroup
                   placeholder="Team"
-                  name="team"
+                  name="team"v
                   value={this.state.team}
                   onChange={this.onChange}
                   options={teamOptions}
@@ -255,6 +256,7 @@ class CreateProfile extends Component {
                 <SelectListGroup
                   placeholder="Location"
                   name="location"
+				  classes="form-control-lg"
                   value={this.state.location}
                   onChange={this.onChange}
                   options={region}

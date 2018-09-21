@@ -133,6 +133,7 @@ class teamStats extends Component {
 			statContent = <Spinner />;
 		} else {
 			statContent = (
+
 				<div>
 					<h1 className="display-4">Match Stats</h1>
 					<div className="col-md-12">
@@ -140,7 +141,7 @@ class teamStats extends Component {
 							<SelectListGroup
 								placeholder="Team"
 								name="teamA"
-								className="input-sm"
+								classes="form-control-sm"
 								value={this.state.teamA}
 								onChange={this.onChange}
 								options={teamOptions}
@@ -150,7 +151,7 @@ class teamStats extends Component {
 							<SelectListGroup
 								placeholder="Team"
 								name="teamB"
-								className="input-sm"
+								classes="form-control-sm"
 								value={this.state.teamB}
 								onChange={this.onChange}
 								options={teamOptions}
@@ -160,7 +161,7 @@ class teamStats extends Component {
 							<SelectListGroup
 								placeholder="roundsMaps"
 								name="roundsMaps"
-								className="input-sm"
+								classes="form-control-sm"
 								value={this.state.roundsMaps}
 								onChange={this.onChange}
 								options={chartOptions}
@@ -170,7 +171,7 @@ class teamStats extends Component {
 							<SelectListGroup
 								placeholder="Season"
 								name="season"
-								className="input-sm"
+								classes="form-control-sm"
 								value={this.state.season}
 								onChange={this.onChange}
 								options={seasonOptions}
