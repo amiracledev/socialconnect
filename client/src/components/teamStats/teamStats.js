@@ -228,6 +228,7 @@ class teamStats extends Component {
       );
     }
 
+<<<<<<< HEAD
     return (
       <div className="teamStats">
         <div className="container">
@@ -238,6 +239,99 @@ class teamStats extends Component {
       </div>
     );
   }
+=======
+		const seasonOptions = [
+			{ label: 'Season 5 2018', value: 'Season 5 2018' },
+			{ label: 'Season 6 2018', value: 'Season 6 2018' }
+		]
+
+		let statContent;
+
+		if (profile === null || loading) {
+			statContent = <Spinner />;
+		} else {
+			statContent = (
+
+				<div>
+					<h1 className="display-4">Match Stats</h1>
+					<div className="col-md-12">
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="Team"
+								name="teamA"
+								classes="form-control-sm"
+								value={this.state.teamA}
+								onChange={this.onChange}
+								options={teamOptions}
+							/>
+						</div>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="Team"
+								name="teamB"
+								classes="form-control-sm"
+								value={this.state.teamB}
+								onChange={this.onChange}
+								options={teamOptions}
+							/>
+						</div>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="roundsMaps"
+								name="roundsMaps"
+								classes="form-control-sm"
+								value={this.state.roundsMaps}
+								onChange={this.onChange}
+								options={chartOptions}
+							/>
+						</div>
+						<div className="col-md-3" style={{ display: 'inline-block' }}>
+							<SelectListGroup
+								placeholder="Season"
+								name="season"
+								classes="form-control-sm"
+								value={this.state.season}
+								onChange={this.onChange}
+								options={seasonOptions}
+							/>
+						</div>
+						<div className="col-md-12">
+							<button className="btn" onClick={this.refreshChart}>Refresh Chart</button>
+						</div>
+					</div>
+					<div className="col-md-12">
+						<Bar
+							data={this.state.chartData}
+							height={100}
+							width={400}
+							options={{
+								maintainAspectRatio: true,
+								legend: {
+									display: this.state.legend
+								}
+							}}
+						/>
+						<div className="col-md-12">
+							<p>* Hover for more info.</p>
+						</div>
+					</div>
+				</div>
+			);
+		}
+
+		return (
+			<div className="teamStats">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-12">
+							{statContent}
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+>>>>>>> 4d00aaee672ce000d80a32c2f20b26e592790b9e
 }
 
 teamStats.propTypes = {
