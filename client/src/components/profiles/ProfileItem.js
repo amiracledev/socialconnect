@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import isEmpty from "../../validation/is-empty";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import isEmpty from '../../validation/is-empty';
 
 class ProfileItem extends Component {
   render() {
@@ -13,8 +13,8 @@ class ProfileItem extends Component {
           <div className="col-2">
             {/* <img src={profile.user.avatar} alt="" className="rounded-circle" /> */}
             <img
-              // src="http://www.3a16.com/images/VSDSD73001_05.jpg"
-              src={profile.user.avatar}
+              src="http://www.3a16.com/images/VSDSD73001_05.jpg"
+              // src={profile.user.avatar}
               alt=""
               className="rounded"
             />
@@ -22,7 +22,7 @@ class ProfileItem extends Component {
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{profile.user.name}</h3>
             <p>
-              {profile.status}{" "}
+              {profile.status}{' '}
               {isEmpty(profile.team) ? null : <span> - {profile.team}</span>}
             </p>
             <p>
