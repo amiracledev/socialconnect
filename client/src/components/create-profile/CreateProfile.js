@@ -291,14 +291,14 @@ class CreateProfile extends Component {
                 />
 
                 <div className="mb-3">
-                  <button
+                <button
                     type="button"
                     onClick={() => {
                       this.setState(prevState => ({
                         displaySocialInputs: !prevState.displaySocialInputs
                       }));
                     }}
-                    className="btn btn-light"
+                    className="common positive-primary"
                   >
                     Add Social Network Links
                   </button>

@@ -1,0 +1,182 @@
+/*
+	common REQUIRED
+	smaller
+	disabled
+	primary
+	secondary
+	positive-primary
+	positive-secondary
+	negative-primary
+	negative-secondary
+*/
+
+:root {
+	--background: white;
+	--primary-color: #50C878;
+	--positive: #17a2b8;
+	--negative: #d31a48;
+	--font-color: black;
+	--input-disabled-color: grey;
+	--font-color-fade: grey;
+}
+
+button.common {
+	margin: auto;
+	border: none;
+	background: var(--primary-color);
+	color: var(--font-color);
+	padding: 0 1rem;
+	line-height: 1.75rem;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: all 0.2s ease;
+}
+
+button.common.smaller {
+	line-height: 22px;
+	font-size: 12px;
+	padding: 0 0.5rem;
+}
+
+button.common:disabled {
+	cursor: not-allowed;
+	cursor: default;
+	background-color: var(--input-disabled-color);
+}
+
+button.common:hover {
+	background-color: var(--primary-color);
+}
+
+button.common.primary {
+	color: var(--background);
+	border: 2px solid var(--primary-color);
+	background-color: var(--primary-color);
+	font-weight: bold;
+}
+
+button.common.primary:hover {
+	color: var(--primary-color);
+	border: 2px solid var(--primary-color);
+	background-color: var(--background);
+}
+
+button.common.primary:disabled,
+button.common.primary.disabled {
+	pointer-events: none;
+	cursor: default;
+	color: var(--font-color-fade);
+	background-color: var(--background);
+	border: 2px solid var(--font-color-fade);
+}
+
+button.common.secondary {
+	color: var(--primary-color);
+	border: 2px solid var(--primary-color);
+	background-color: var(--background);
+	font-weight: bold;
+}
+
+button.common.secondary:hover {
+	color: var(--background);
+	border: 2px solid var(--primary-color);
+	background-color: var(--primary-color);
+}
+
+button.common.secondary:disabled,
+button.common.secondary.disabled {
+	pointer-events: none;
+	cursor: default;
+	color: var(--font-color-fade);
+	background-color: var(--background);
+	border: 2px solid var(--font-color-fade);
+}
+
+button.common.positive-primary {
+	color: var(--background);
+	border: 2px solid var(--positive);
+	background-color: var(--positive);
+	font-weight: bold;
+}
+
+button.common.positive-primary:hover {
+	color: var(--positive);
+	border: 2px solid var(--positive);
+	background-color: var(--background);
+}
+
+button.common.positive-primary:disabled,
+button.common.positive-primary.disabled {
+	pointer-events: none;
+	cursor: default;
+	color: var(--font-color-fade);
+	background-color: var(--background);
+	border: 2px solid var(--font-color-fade);
+}
+
+button.common.positive-secondary {
+	color: var(--positive);
+	border: 2px solid var(--positive);
+	background-color: var(--background);
+	font-weight: bold;
+}
+
+button.common.positive-secondary:hover {
+	color: var(--background);
+	border: 2px solid var(--positive);
+	background-color: var(--positive);
+}
+
+button.common.positive-secondary:disabled,
+button.common.positive-secondary.disabled {
+	pointer-events: none;
+	cursor: default;
+	color: var(--font-color-fade);
+	background-color: var(--background);
+	border: 2px solid var(--font-color-fade);
+}
+
+button.common.negative-primary {
+	color: var(--background);
+	border: 2px solid var(--negative);
+	background-color: var(--negative);
+	font-weight: bold;
+}
+
+button.common.negative-primary:hover {
+	color: var(--negative);
+	border: 2px solid var(--negative);
+	background-color: var(--background);
+}
+
+button.common.negative-primary:disabled,
+button.common.negative-primary.disabled {
+	pointer-events: none;
+	cursor: default;
+	color: var(--font-color-fade);
+	background-color: var(--background);
+	border: 2px solid var(--font-color-fade);
+}
+
+button.common.negative-secondary {
+	color: var(--negative);
+	border: 2px solid var(--negative);
+	background-color: var(--background);
+	font-weight: bold;
+}
+
+button.common.negative-secondary:hover {
+	color: var(--background);
+	border: 2px solid var(--negative);
+	background-color: var(--negative);
+}
+
+button.common.negative-secondary:disabled,
+button.common.negative-secondary.disabled {
+	pointer-events: none;
+	cursor: default;
+	color: var(--font-color-fade);
+	background-color: var(--background);
+	border: 2px solid var(--font-color-fade);
+}

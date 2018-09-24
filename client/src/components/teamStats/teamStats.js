@@ -203,7 +203,7 @@ class teamStats extends Component {
               />
             </div>
             <div className="col-md-12">
-              <button className="btn" onClick={this.refreshChart}>
+              <button className="common primary" onClick={this.refreshChart}>
                 Refresh Chart
               </button>
             </div>
@@ -211,8 +211,6 @@ class teamStats extends Component {
           <div className="col-md-12">
             <Bar
               data={this.state.chartData}
-              height={100}
-              width={400}
               options={{
                 maintainAspectRatio: true,
                 legend: {

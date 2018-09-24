@@ -74,7 +74,7 @@ class PostItem extends Component {
                   <button
                     onClick={this.onDeleteClick.bind(this, post._id)}
                     type="button"
-                    className="btn btn-danger mr-1"
+                    className="common negative-secondary"
                   >
                     <i className="fas fa-times" />
                   </button>

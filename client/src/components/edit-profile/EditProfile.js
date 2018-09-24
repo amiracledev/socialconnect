@@ -348,7 +348,7 @@ class CreateProfile extends Component {
                         displaySocialInputs: !prevState.displaySocialInputs
                       }));
                     }}
-                    className="btn btn-light"
+                    className="common positive-primary"
                   >
                     Add Social Network Links
                   </button>
