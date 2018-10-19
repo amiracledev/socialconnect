@@ -11,13 +11,13 @@ class ProfileItem extends Component {
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <div className="col-2">
-            {/* <img src={profile.user.avatar} alt="" className="rounded-circle" /> */}
-            <img
+            <img src={profile.user.avatar} alt="" className="rounded" />
+            {/* <img
               src="http://www.3a16.com/images/VSDSD73001_05.jpg"
               // src={profile.user.avatar}
               alt=""
               className="rounded"
-            />
+            /> */}
           </div>
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{profile.user.name}</h3>
