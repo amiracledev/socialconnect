@@ -15,39 +15,41 @@ router.use('/winloss', winLoss);
 router.route('/').get((req, res) => {
 	WebFunctions.getMatches().then(() => {
 		WebFunctions.getAllMatchInfo().then((matches) => {
-			for (let index in matches) {
-				MatchFunctions.insertOneMatch(matches[index]).then((inserted) => {
-					if (inserted) {
-						for (let i = 1; i < 4; i++) {
-							let homeTeamMap = {
-								teamName: matches[index]['homeTeam'],
-								map: matches[index]['map' + i]['mapName'],
-								roundsWon: matches[index]['map' + i]['scoreHome'],
-								roundsLoss: matches[index]['map' + i]['scoreAway']
-							}
-							let awayTeamMap = {
-								teamName: matches[index]['awayTeam'],
-								map: matches[index]['map' + i]['mapName'],
-								roundsWon: matches[index]['map' + i]['scoreAway'],
-								roundsLoss: matches[index]['map' + i]['scoreHome']
-							}
-							TeamFunctions.updateOneMap(homeTeamMap).then(() => {
-								TeamFunctions.updateOneMap(awayTeamMap).then(() => {
-									if (i == 3) {
-										if (index == matches.length - 1) {
-											res.send('done')
+			SeasonFunctions.getCurrentSeason().then(season => {
+				for (let index in matches) {
+					MatchFunctions.insertOneMatch(matches[index]).then((inserted) => {
+						if (inserted) {
+							for (let i = 1; i < 4; i++) {
+								let homeTeamMap = {
+									teamName: matches[index]['homeTeam'],
+									map: matches[index]['map' + i]['mapName'],
+									roundsWon: matches[index]['map' + i]['scoreHome'],
+									roundsLoss: matches[index]['map' + i]['scoreAway']
+								}
+								let awayTeamMap = {
+									teamName: matches[index]['awayTeam'],
+									map: matches[index]['map' + i]['mapName'],
+									roundsWon: matches[index]['map' + i]['scoreAway'],
+									roundsLoss: matches[index]['map' + i]['scoreHome']
+								}
+								TeamFunctions.updateOneMap(homeTeamMap, season['season']).then(() => {
+									TeamFunctions.updateOneMap(awayTeamMap, season['season']).then(() => {
+										if (i == 3) {
+											if (index == matches.length - 1) {
+												res.send('done')
+											}
 										}
-									}
+									})
 								})
-							})
+							}
+						} else {
+							if (index == matches.length - 1) {
+								res.send('done')
+							}
 						}
-					} else {
-						if (index == matches.length - 1) {
-							res.send('done')
-						}
-					}
-				});
-			}
+					});
+				}
+			});
 		});
 	});
 });

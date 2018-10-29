@@ -2,17 +2,6 @@
 const Season = require("../../../models/Season");
 
 let SeasonFunctions = {
-	'getTeamNames': () => {
-		return new Promise((resolve, reject) => {
-			Season.find({}, '-_id', function (err, results) {
-				if (err) {
-					console.error(err);
-					reject(err);
-				}
-				resolve(results);
-			});
-		});
-	},
 	'insertOneSeason': (season_data) => {
 		return new Promise((resolve, reject) => {
 			let query = {
@@ -53,6 +42,17 @@ let SeasonFunctions = {
 				}
 				resolve(result);
 			})
+		});
+	},
+	'getCurrentSeason': () => {
+		return new Promise((resolve, reject) => {
+			Season.findOne({endDate: {$exists: false}}, function(err, result){
+				if(err){
+					console.error(err);
+					reject(err);
+				}
+				resolve(result);
+			});
 		});
 	}
 }
