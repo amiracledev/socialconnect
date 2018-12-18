@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 const WebFunctions = require('./shared/WebFunctions');
@@ -8,50 +8,55 @@ const SeasonFunctions = require('./shared/SeasonFunctions');
 
 const Season = require('../../models/Season');
 
-const winLoss = require("./chartTypes/winLoss");
+const winLoss = require('./chartTypes/winLoss');
 
 router.use('/winloss', winLoss);
 
 router.route('/').get((req, res) => {
-	WebFunctions.getMatches().then(() => {
-		WebFunctions.getAllMatchInfo().then((matches) => {
-			SeasonFunctions.getCurrentSeason().then(season => {
-				for (let index in matches) {
-					MatchFunctions.insertOneMatch(matches[index]).then((inserted) => {
-						if (inserted) {
-							for (let i = 1; i < 4; i++) {
-								let homeTeamMap = {
-									teamName: matches[index]['homeTeam'],
-									map: matches[index]['map' + i]['mapName'],
-									roundsWon: matches[index]['map' + i]['scoreHome'],
-									roundsLoss: matches[index]['map' + i]['scoreAway']
-								}
-								let awayTeamMap = {
-									teamName: matches[index]['awayTeam'],
-									map: matches[index]['map' + i]['mapName'],
-									roundsWon: matches[index]['map' + i]['scoreAway'],
-									roundsLoss: matches[index]['map' + i]['scoreHome']
-								}
-								TeamFunctions.updateOneMap(homeTeamMap, season['season']).then(() => {
-									TeamFunctions.updateOneMap(awayTeamMap, season['season']).then(() => {
-										if (i == 3) {
-											if (index == matches.length - 1) {
-												res.send('done')
-											}
-										}
-									})
-								})
-							}
-						} else {
-							if (index == matches.length - 1) {
-								res.send('done')
-							}
-						}
-					});
-				}
-			});
-		});
-	});
+  WebFunctions.getMatches().then(() => {
+    WebFunctions.getAllMatchInfo().then(matches => {
+      SeasonFunctions.getCurrentSeason().then(season => {
+        for (let index in matches) {
+          MatchFunctions.insertOneMatch(matches[index]).then(inserted => {
+            if (inserted) {
+              for (let i = 1; i < 4; i++) {
+                let homeTeamMap = {
+                  teamName: matches[index]['homeTeam'],
+                  map: matches[index]['map' + i]['mapName'],
+                  roundsWon: matches[index]['map' + i]['scoreHome'],
+                  roundsLoss: matches[index]['map' + i]['scoreAway']
+                };
+                let awayTeamMap = {
+                  teamName: matches[index]['awayTeam'],
+                  map: matches[index]['map' + i]['mapName'],
+                  roundsWon: matches[index]['map' + i]['scoreAway'],
+                  roundsLoss: matches[index]['map' + i]['scoreHome']
+                };
+                TeamFunctions.updateOneMap(homeTeamMap, season['season']).then(
+                  () => {
+                    TeamFunctions.updateOneMap(
+                      awayTeamMap,
+                      season['season']
+                    ).then(() => {
+                      if (i == 3) {
+                        if (index == matches.length - 1) {
+                          res.send('done');
+                        }
+                      }
+                    });
+                  }
+                );
+              }
+            } else {
+              if (index == matches.length - 1) {
+                res.send('done');
+              }
+            }
+          });
+        }
+      });
+    });
+  });
 });
 
 /* router.route('/teams').get((req, res) => {
@@ -75,52 +80,55 @@ router.route('/').get((req, res) => {
 }); */
 
 router.route('/setwinloss').get((req, res) => {
-	let season = req.query.season.replace('"', '').replace('"', '')
-	SeasonFunctions.findSeason(season).then(result => {
-		TeamFunctions.resetTeamWinLoss(result['season']).then(() => {
-			if (result['endDate'] == null) result['endDate'] = new Date().toISOString();
-			let query = {
-				'$and': [{
-						date: {
-							$gte: result['startDate']
-						}
-					},
-					{
-						date: {
-							$lte: result['endDate']
-						}
-					}
-				]
-			}
-			MatchFunctions.findAllMatches(query).then(matches => {
-				for (let index in matches) {
-					for (let i = 1; i < 4; i++) {
-						let homeTeamMap = {
-							teamName: matches[index]['homeTeam'],
-							map: matches[index]['map' + i]['mapName'],
-							roundsWon: matches[index]['map' + i]['scoreHome'],
-							roundsLoss: matches[index]['map' + i]['scoreAway']
-						}
-						let awayTeamMap = {
-							teamName: matches[index]['awayTeam'],
-							map: matches[index]['map' + i]['mapName'],
-							roundsWon: matches[index]['map' + i]['scoreAway'],
-							roundsLoss: matches[index]['map' + i]['scoreHome']
-						}
-						TeamFunctions.updateOneMap(homeTeamMap, season).then(() => {
-							TeamFunctions.updateOneMap(awayTeamMap, season).then(() => {
-								if (i == 3) {
-									if (index == matches.length - 1) {
-										res.send('done')
-									}
-								}
-							})
-						})
-					}
-				}
-			})
-		});
-	});
+  let season = req.query.season.replace('"', '').replace('"', '');
+  SeasonFunctions.findSeason(season).then(result => {
+    TeamFunctions.resetTeamWinLoss(result['season']).then(() => {
+      if (result['endDate'] == null)
+        result['endDate'] = new Date().toISOString();
+      let query = {
+        $and: [
+          {
+            date: {
+              $gte: result['startDate']
+            }
+          },
+          {
+            date: {
+              $lte: result['endDate']
+            }
+          }
+        ]
+      };
+      MatchFunctions.findAllMatches(query).then(matches => {
+        for (let index in matches) {
+          print(matches, 'iuytfvciyutciuygtfvouycvikuygtc');
+          for (let i = 1; i < 4; i++) {
+            let homeTeamMap = {
+              teamName: matches[index]['homeTeam'],
+              map: matches[index]['map' + i]['mapName'],
+              roundsWon: matches[index]['map' + i]['scoreHome'],
+              roundsLoss: matches[index]['map' + i]['scoreAway']
+            };
+            let awayTeamMap = {
+              teamName: matches[index]['awayTeam'],
+              map: matches[index]['map' + i]['mapName'],
+              roundsWon: matches[index]['map' + i]['scoreAway'],
+              roundsLoss: matches[index]['map' + i]['scoreHome']
+            };
+            TeamFunctions.updateOneMap(homeTeamMap, season).then(() => {
+              TeamFunctions.updateOneMap(awayTeamMap, season).then(() => {
+                if (i == 3) {
+                  if (index == matches.length - 1) {
+                    res.send('done');
+                  }
+                }
+              });
+            });
+          }
+        }
+      });
+    });
+  });
 });
 
 /* router.route('/resetteam').get((req, res) => {
